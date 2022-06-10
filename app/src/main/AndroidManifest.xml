@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+  <!-- Necessary example app permissions-->
+  <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
+  <uses-permission android:name="${applicationId}.permission.C2D_MESSAGE" />
+  <uses-permission android:name="android.permission.CAMERA" />
+  <uses-permission android:name="android.permission.INTERNET" />
+  <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
+  <!-- Necessary runtime SDK permissions-->
+  <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+  <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
+  <uses-feature android:name="android.hardware.location.gps" />
+  <permission
+    android:name="${applicationId}.permission.C2D_MESSAGE"
+    android:protectionLevel="signature" />
+
+  <!-- Service foreground permission-->
+  <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+
+  <application
+    android:name=".OnfleetClientExampleApplication"
+    android:allowBackup="false"
+    android:icon="@mipmap/ic_launcher"
+    android:label="Example App"
+    android:roundIcon="@mipmap/ic_launcher_round"
+    android:supportsRtl="true"
+    android:theme="@style/Theme.AppCompat">
+    <activity
+      android:name=".MainActivity"
+      android:exported="true">
+      <intent-filter>
+        <action android:name="android.intent.action.MAIN" />
+
+        <category android:name="android.intent.category.LAUNCHER" />
+      </intent-filter>
+    </activity>
+
+    <!-- Service to handle push notifications -->
+    <service
+      android:name=".FcmPushReceiverService"
+      android:exported="false">
+      <intent-filter>
+        <action android:name="com.google.firebase.MESSAGING_EVENT" />
+      </intent-filter>
+    </service>
+
+    <!-- Service to run in foreground and ensure gps can be sent even when app is minimized -->
+    <service
+      android:name=".ForegroundService"
+      android:exported="false"
+      android:foregroundServiceType="location" />
+  </application>
+
+</manifest>
