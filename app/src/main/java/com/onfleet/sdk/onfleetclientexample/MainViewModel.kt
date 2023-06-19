@@ -1,7 +1,6 @@
 package com.onfleet.sdk.onfleetclientexample
 
 import android.os.Parcelable
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.google.firebase.messaging.FirebaseMessaging
@@ -15,8 +14,8 @@ import timber.log.Timber
 class MainViewModel : ViewModel() {
     private val _state = MutableStateFlow(State())
     val state = _state.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), _state.value)
-    private var cachedPhoneNumber = "" //for simplification - don't cache sensitive data
-    private var cachedPassword = "" //for simplification - don't cache sensitive data
+    private var cachedPhoneNumber = "" // for simplification - don't cache sensitive data
+    private var cachedPassword = "" // for simplification - don't cache sensitive data
 
     @Parcelize
     data class State(
@@ -40,7 +39,7 @@ class MainViewModel : ViewModel() {
     }
 
     init {
-        //In this example driver by default accepts all pending invitations
+        // In this example driver by default accepts all pending invitations
         viewModelScope.launch {
             SessionManager.getInstance().getAccountsFlow().collect { accounts ->
                 for (account in accounts) {
@@ -78,7 +77,7 @@ class MainViewModel : ViewModel() {
                             Timber.e(it)
                         }
                         sdkError.resolvableApiException?.let {
-                            //resolve in activity
+                            // resolve in activity
                         }
                     }
                 }
@@ -143,7 +142,7 @@ class MainViewModel : ViewModel() {
 
     private fun onSelfAssignClicked(task: Task) = viewModelScope.launch {
         _state.update { it.copy(isLoading = true) }
-        when (val response = TasksManager.getInstance().selfAssignTask(task.id)) {
+        when (val response = TasksManager.getInstance().selfAssignTask(listOf(task.id))) {
             SelfAssignResponse.SUCCESS -> {}
             else -> {
                 Timber.e(response.toString())
@@ -154,19 +153,22 @@ class MainViewModel : ViewModel() {
 
     private fun onCompleteTaskClicked(task: Task) = viewModelScope.launch {
         _state.update { it.copy(isLoading = true) }
-        when (val response = TasksManager.getInstance()
-            .completeTask(
-                task.id,
-                completionDetails = TaskCompletionDetails(
-                    success = true,
-                    attachments = emptyList(),
-                    barcodes = emptyList(),
-                    completionNotes = null,
-                    failureNotes = null,
-                    failureReason = null,
-                    signatureText = null
+        when (
+            val response = TasksManager.getInstance()
+                .completeTask(
+                    task.id,
+                    completionDetails = TaskCompletionDetails(
+                        success = true,
+                        attachments = emptyList(),
+                        barcodes = emptyList(),
+                        completionNotes = null,
+                        failureNotes = null,
+                        successNotes = null,
+                        completionStatusReason = null,
+                        signatureText = null,
+                    ),
                 )
-            )) {
+        ) {
             CompleteTaskResponse.SUCCESS -> {}
             else -> {
                 Timber.e(response.toString())
@@ -200,7 +202,6 @@ class MainViewModel : ViewModel() {
             _state.update { it.copy(isLoading = false) }
         }
 
-
     private fun onLogin(phoneNumber: String, password: String) =
         viewModelScope.launch {
             cachedPhoneNumber = phoneNumber
@@ -208,5 +209,4 @@ class MainViewModel : ViewModel() {
             _state.update { it.copy(isLoading = true) }
             SessionManager.getInstance().login(phoneNumber, password)
         }
-
 }
