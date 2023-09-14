@@ -14,7 +14,7 @@ android {
         minSdk = 24
         targetSdk = 34
         versionCode = 1
-        versionName = "0.11.0"
+        versionName = "0.11.1"
         multiDexEnabled = true
     }
     buildTypes {
@@ -44,7 +44,7 @@ android {
 }
 
 dependencies {
-    implementation("com.onfleet:driver:0.11.0")
+    implementation("com.onfleet:driver:0.11.1")
     implementation("androidx.appcompat:appcompat:1.6.1")
     implementation("androidx.core:core-ktx:1.10.1")
     implementation("org.jetbrains.kotlin:kotlin-stdlib:1.8.22")

@@ -1,6 +1,10 @@
 # Change Log
 Breaking changes and additions to to Onfleet SDK will be documented in this file.
 
+## [0.11.1] - 2023-09-14
+
+No changes. Only a proguard fix to avoid dependency conflicts on the obfuscated classes.
+
 ## [0.11.0] - 2023-06-19
 
 Breaking changes to API
