@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.IBinder
 import android.app.PendingIntent
 import android.app.Service
+import android.content.pm.ServiceInfo
 import android.os.Build
 import androidx.core.app.NotificationCompat
 import java.lang.UnsupportedOperationException
@@ -18,8 +19,10 @@ class ForegroundService : Service() {
         when (intent.action) {
             ACTION_START_FOREGROUND_SERVICE -> {
                 val pendingIntent = PendingIntent.getActivity(
-                    this, 0,
-                    Intent(this, MainActivity::class.java), if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    this,
+                    0,
+                    Intent(this, MainActivity::class.java),
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                         PendingIntent.FLAG_IMMUTABLE
                     } else 0
                 )
@@ -29,8 +32,16 @@ class ForegroundService : Service() {
                     .setContentIntent(pendingIntent)
                     .setOngoing(true)
                     .build()
-                startForeground(111, notification)
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
+                    startForeground(
+                        111, notification,
+                        ServiceInfo.FOREGROUND_SERVICE_TYPE_LOCATION
+                    )
+                } else {
+                    startForeground(111, notification)
+                }
             }
+
             ACTION_STOP_FOREGROUND_SERVICE -> {
                 stopForeground(true)
                 stopSelf()
