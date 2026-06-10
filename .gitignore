@@ -15,3 +15,6 @@
 /.idea/deploymentTargetDropDown.xml
 /bundletool_temp/bundletool.jar
 /app/jacoco.exec
+/gradle/wrapper/gradle-wrapper.jar
+/gradlew
+/gradlew.bat

@@ -1,6 +1,5 @@
 package com.onfleet.sdk.onfleetclientexample
 
-import android.os.Parcelable
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.google.firebase.messaging.FirebaseMessaging
@@ -8,7 +7,6 @@ import com.onfleet.sdk.dataModels.*
 import com.onfleet.sdk.managers.*
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
-import kotlinx.parcelize.Parcelize
 import timber.log.Timber
 
 class MainViewModel : ViewModel() {
@@ -17,7 +15,6 @@ class MainViewModel : ViewModel() {
     private var cachedPhoneNumber = "" // for simplification - don't cache sensitive data
     private var cachedPassword = "" // for simplification - don't cache sensitive data
 
-    @Parcelize
     data class State(
         val isLoading: Boolean = false,
         val isAuthenticated: Boolean = false,
@@ -26,7 +23,7 @@ class MainViewModel : ViewModel() {
         val isDetails: Boolean = false,
         val tasks: List<Task> = emptyList(),
         val selectedTask: Task? = null,
-    ) : Parcelable
+    )
 
     sealed class Event {
         data class OnDutyClicked(val status: Boolean) : Event()
@@ -43,7 +40,7 @@ class MainViewModel : ViewModel() {
         viewModelScope.launch {
             SessionManager.getInstance().getAccountsFlow().collect { accounts ->
                 for (account in accounts) {
-                    if (account.isPending()) {
+                    if (account.accountStatus == AccountStatus.INVITED) {
                         SessionManager.getInstance().respondToInvitation(account, true)
                     }
                 }
@@ -55,7 +52,7 @@ class MainViewModel : ViewModel() {
             }
         }
         viewModelScope.launch {
-            TasksManager.getInstance().getTasksFlow().collect { tasks ->
+            TasksManager.getInstance().getTasks().collect { tasks ->
                 val selectedTask = tasks.find { it.id == _state.value.selectedTask?.id }
                 _state.update { it.copy(tasks = tasks, selectedTask = selectedTask) }
             }
@@ -80,6 +77,11 @@ class MainViewModel : ViewModel() {
                             // resolve in activity
                         }
                     }
+                    SDKErrorType.INTEGRITY_API_NOT_AVAILABLE -> {}
+                    SDKErrorType.INTEGRITY_CANNOT_BIND_TO_SERVICE -> {}
+                    SDKErrorType.PLAY_SERVICES_NOT_FOUND -> {}
+                    SDKErrorType.PLAY_STORE_ACCOUNT_NOT_FOUND -> {}
+                    SDKErrorType.PLAY_STORE_NOT_FOUND -> {}
                 }
             }
         }
@@ -92,7 +94,7 @@ class MainViewModel : ViewModel() {
                     LoginStatus.SET_NEW_PASSWORD_SUCCESS, LoginStatus.PROVISIONING_COMPLETED_LOG_IN -> {
                         SessionManager.getInstance().login(cachedPhoneNumber, cachedPassword)
                     }
-                    LoginStatus.WAIT_PROVISIONING, LoginStatus.WAIT_ADMIN_VERIFICATION, LoginStatus.WAIT_SMS_VERIFICATION, LoginStatus.RECEIVED_SMS_VERIFICATION -> {
+                    LoginStatus.WAIT_PROVISIONING -> {
                         Timber.d(status.toString())
                     }
                     LoginStatus.SET_NEW_PASSWORD -> {
@@ -142,7 +144,7 @@ class MainViewModel : ViewModel() {
 
     private fun onSelfAssignClicked(task: Task) = viewModelScope.launch {
         _state.update { it.copy(isLoading = true) }
-        when (val response = TasksManager.getInstance().selfAssignTask(listOf(task.id))) {
+        when (val response = TasksManager.getInstance().selfAssignTasks(listOf(task.id))) {
             SelfAssignResponse.SUCCESS -> {}
             else -> {
                 Timber.e(response.toString())
@@ -166,6 +168,8 @@ class MainViewModel : ViewModel() {
                         successNotes = null,
                         completionStatusReason = null,
                         signatureText = null,
+                        attestationAge = null,
+                        customRequirements = null,
                     ),
                 )
         ) {
