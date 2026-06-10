@@ -9,12 +9,14 @@
 **/**/*.apk
 /app/production
 /app/debug
-/app/google-services.json
 /fastlane/report.xml
 /firebase_app_distribution
 /.idea/deploymentTargetDropDown.xml
 /bundletool_temp/bundletool.jar
 /app/jacoco.exec
-/gradle/wrapper/gradle-wrapper.jar
-/gradlew
-/gradlew.bat
+
+# Local SDK config — copy from onfleet.properties.example
+/app/src/main/assets/onfleet.properties
+
+# Local Firebase config — replaces the committed placeholder google-services.json
+/app/google-services.json.local

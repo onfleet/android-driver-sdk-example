@@ -1,0 +1,5 @@
+# Copy this file to onfleet.properties and fill in the values.
+#   cp app/src/main/assets/onfleet.properties.example app/src/main/assets/onfleet.properties
+# Both values are provided by Onfleet when you register your app.
+applicationName=
+sdkApplicationId=
