@@ -7,19 +7,17 @@ Breaking changes to API
 
 ### Added Features
 
-- Custom fields, see https://support.onfleet.com/hc/en-us/articles/21799942217748-Custom-Fields
-- Route plans, see https://support.onfleet.com/hc/en-us/articles/25492148360596-Route-Plans
-- Self-assign routes, see https://support.onfleet.com/hc/en-us/articles/360041740172-Self-Assign-Tasks-Routes
-- END_AT_HUB TaskType, see https://support.onfleet.com/hc/en-us/articles/34992206461716-End-Route-Return-to-Hub
-- END_AT_HOME TaskType, see https://support.onfleet.com/hc/en-us/articles/34992206461716-End-Route-Return-to-Hub
-- ROUTE_LOAD TaskType
-- BULK_PICK_UP TaskType
-- Requirement state HIDDEN
-- Custom task completion requirements
-- Custom completion reasons, see https://support.onfleet.com/hc/en-us/articles/9382652814228-Custom-Task-Completion-Reasons
-- Age Attestation requirement, see https://support.onfleet.com/hc/en-us/articles/10373142665364-Complete-a-Task#h_01GGAK84GT77TGWRK5GHTH065X
-- Order short id visibility on task object
-- Completed task PII enabled/disabled settings, see https://support.onfleet.com/hc/en-us/articles/38159626547348-Remove-Personally-Identifiable-Information-PII-from-Driver-Task-History
+- **Custom fields** ([Custom Fields](https://support.onfleet.com/hc/en-us/articles/21799942217748-Custom-Fields))
+- **Route plans** ([Route Plans](https://support.onfleet.com/hc/en-us/articles/25492148360596-Route-Plans))
+- **Self-assign tasks** ([Self-Assign Tasks & Routes](https://support.onfleet.com/hc/en-us/articles/360041740172-Self-Assign-Tasks-Routes))
+- **End-of-route task types** ([End Route / Return to Hub](https://support.onfleet.com/hc/en-us/articles/34992206461716-End-Route-Return-to-Hub))
+- **Route load & bulk pick-up task types**
+- **Hidden requirement state**
+- **Custom task completion requirements** ([Proof of Delivery](https://support.onfleet.com/hc/en-us/articles/10348848090644-Proof-of-Delivery))
+- **Custom completion reasons** ([Custom Task Completion Reasons](https://support.onfleet.com/hc/en-us/articles/9382652814228-Custom-Task-Completion-Reasons))
+- **Age attestation** ([Complete a Task](https://support.onfleet.com/hc/en-us/articles/10373142665364-Complete-a-Task#h_01GGAK84GT77TGWRK5GHTH065X))
+- **Order short id**
+- **Completed-task PII setting** ([Remove PII from Driver Task History](https://support.onfleet.com/hc/en-us/articles/38159626547348-Remove-Personally-Identifiable-Information-PII-from-Driver-Task-History))
 
 ### Added
 
