@@ -1,6 +1,5 @@
 package com.onfleet.sdk.onfleetclientexample
 
-import androidx.multidex.MultiDex
 import android.os.Build
 import android.os.Build.VERSION_CODES
 import android.annotation.TargetApi
@@ -17,15 +16,11 @@ import timber.log.Timber.Forest.plant
 class OnfleetClientExampleApplication : Application() {
     override fun attachBaseContext(base: Context) {
         super.attachBaseContext(base)
-        MultiDex.install(this)
     }
 
     override fun onCreate() {
         super.onCreate()
-        if (BuildConfig.DEBUG) {
-            plant(Timber.DebugTree())
-        }
-
+        plant(Timber.DebugTree())
         initOnfleetSDK()
     }
 

@@ -1,66 +1,55 @@
 plugins {
     id("com.android.application")
-    id("kotlin-android")
-    id("kotlin-parcelize")
+    id("org.jetbrains.kotlin.plugin.parcelize")
     id("com.google.gms.google-services")
+    id("org.jetbrains.kotlin.plugin.compose")
 }
 
 android {
-    compileSdk = 34
-    buildToolsVersion = "34.0.0"
+    compileSdk = 36
+    buildToolsVersion = "36.0.0"
 
     defaultConfig {
         applicationId = "com.onfleet.sdk.onfleetclientexample"
-        minSdk = 24
-        targetSdk = 34
+        minSdk = 26
+        targetSdk = 36
         versionCode = 1
-        versionName = "0.11.1"
-        multiDexEnabled = true
+        versionName = "0.12.0"
     }
     buildTypes {
         release {
             isMinifyEnabled = false
-            proguardFiles(getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro")
+            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
         }
         debug {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
-    }
-    kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_11.toString()
-        freeCompilerArgs = freeCompilerArgs + "-Xopt-in=kotlin.RequiresOptIn"
+        sourceCompatibility = JavaVersion.VERSION_21
+        targetCompatibility = JavaVersion.VERSION_21
     }
 
     buildFeatures {
         compose = true
     }
-    composeOptions {
-        kotlinCompilerExtensionVersion = "1.4.7"
-    }
     namespace = "com.onfleet.sdk.onfleetclientexample"
 }
 
 dependencies {
-    implementation("com.onfleet:driver:0.11.1")
-    implementation("androidx.appcompat:appcompat:1.6.1")
-    implementation("androidx.core:core-ktx:1.10.1")
-    implementation("org.jetbrains.kotlin:kotlin-stdlib:1.8.22")
-    implementation("androidx.exifinterface:exifinterface:1.3.6")
-    implementation("com.google.firebase:firebase-core:21.1.1")
-    implementation("com.google.firebase:firebase-messaging:23.1.2")
-    implementation("androidx.multidex:multidex:2.0.1")
+    implementation("com.onfleet:driver:0.12.0")
+    implementation("androidx.appcompat:appcompat:1.7.1")
+    implementation("org.jetbrains.kotlin:kotlin-stdlib:2.1.0")
+    implementation("androidx.exifinterface:exifinterface:1.4.2")
+    implementation(platform("com.google.firebase:firebase-bom:34.11.0"))
+    implementation("com.google.firebase:firebase-messaging")
     implementation("com.jakewharton.timber:timber:5.0.1")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.1")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.1")
-    implementation("androidx.compose.ui:ui:1.5.0-beta02")
-    implementation("androidx.compose.ui:ui-tooling:1.5.0-beta02")
-    implementation("androidx.compose.foundation:foundation:1.5.0-beta02")
-    implementation("androidx.compose.compiler:compiler:1.4.7")
-    implementation("androidx.activity:activity-compose:1.7.2")
-    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.6.1")
-    implementation("androidx.compose.material3:material3:1.2.0-alpha02")
-    implementation("com.google.accompanist:accompanist-permissions:0.31.3-beta")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.10.2")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.10.2")
+    implementation("androidx.compose.ui:ui:1.10.5")
+    implementation("androidx.compose.ui:ui-tooling:1.10.5")
+    implementation("androidx.compose.foundation:foundation:1.10.5")
+    implementation("androidx.activity:activity-compose:1.13.0")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.10.0")
+    implementation("androidx.compose.material3:material3:1.4.0")
+    implementation("com.google.accompanist:accompanist-permissions:0.37.3")
 }

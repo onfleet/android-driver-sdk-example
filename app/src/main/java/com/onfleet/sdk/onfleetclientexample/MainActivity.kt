@@ -9,6 +9,7 @@ import android.widget.Toast
 import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.*
@@ -63,7 +64,7 @@ class MainActivity : AppCompatActivity() {
                     } else if (!state.isAuthenticated) {
                         var phone by remember { mutableStateOf("") }
                         var password by remember { mutableStateOf("") }
-                        Column(modifier = Modifier.fillMaxSize()) {
+                        Column(modifier = Modifier.fillMaxSize(), verticalArrangement = Arrangement.Center) {
                             TextField(value = phone, label = { Text("Phone") }, onValueChange = { phone = it })
                             TextField(
                                 value = password, label = { Text("Password") }, onValueChange = { password = it },
@@ -80,7 +81,8 @@ class MainActivity : AppCompatActivity() {
                     } else if (state.isList) {
                         LazyColumn(
                             contentPadding = PaddingValues(horizontal = 16.dp, vertical = 8.dp),
-                            modifier = Modifier.fillMaxSize()
+                            modifier = Modifier.fillMaxSize(),
+                            verticalArrangement = Arrangement.Center
                         ) {
                             item {
                                 Switch(
@@ -112,7 +114,7 @@ class MainActivity : AppCompatActivity() {
                         }
                     } else if (state.isDetails) {
                         state.selectedTask?.let {
-                            Column(modifier = Modifier.fillMaxSize()) {
+                            Column(modifier = Modifier.fillMaxSize(), verticalArrangement = Arrangement.Center) {
                                 Text("Details of " + it.shortId)
                                 Button(
                                     onClick = {
