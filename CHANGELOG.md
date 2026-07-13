@@ -1,6 +1,39 @@
 # Change Log
 Breaking changes and additions to Onfleet SDK will be documented in this file.
 
+## [0.13.0]
+
+Breaking changes to API
+
+### Added Features
+
+- PIN verification requirement on task completion
+- Geofence enforcement (warn / block) on task completion
+- Bulk pick-up task linking (BULK_PICK_UP child tasks)
+- Encrypted media file handling on CoreManager
+
+### Added
+
+- PinVerification model added (`PinVerification` with hash + salt)
+- Task now exposes `pinVerification` (PinVerification)
+- Requirements now exposes `pin` (RequirementState) completion requirement
+- TaskCompletionDetails now exposes `pinVerified`
+- GeofenceConfig model added (`GeofenceConfig`: requirementLevel, radiusMeters, taskTypes)
+- GeofenceRequirementLevel enum added (`OFF`, `WARN`, `BLOCK`)
+- GeofenceAttempt model added (`GeofenceAttempt`: type, location, timestamp)
+- GeofenceAttemptType enum added (`WARN`, `BLOCK`, with `fromCode()`)
+- Organization now exposes `geofence` (GeofenceConfig) settings
+- CompletedTask now exposes `geofenceAttempts` and `completedWithGeofenceWarning`
+- TaskCompletionDetails now exposes `geofenceAttempts`, `completedWithGeofenceWarning`, `location`
+- SyncStatus complete-error variants now carry `geofenceAttempts`
+- BulkTask model added (`BulkTask`: taskType, taskId, shortId, orderId, linkedTaskRecipient, linkedTaskDestination)
+- Task now exposes `bulkTasks` (List<BulkTask>)
+- CoreManager has new media file methods: `saveMediaFile()`, `openMediaFileForPreview()`, `encryptInputStreamToFile()`, `deleteMediaFile()`, `isEncryptedMediaFile()`
+
+### Changed
+
+- Task/CompletedTask/Organization/Requirements/TaskCompletionDetails public constructor signatures expanded with the fields above (callers passing positional args must update)
+
 ## [0.12.0]
 
 Breaking changes to API
