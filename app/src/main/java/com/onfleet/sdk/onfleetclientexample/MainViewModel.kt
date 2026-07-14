@@ -170,6 +170,7 @@ class MainViewModel : ViewModel() {
                         signatureText = null,
                         attestationAge = null,
                         customRequirements = null,
+                        pinVerified = null,
                     ),
                 )
         ) {
