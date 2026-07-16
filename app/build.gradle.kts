@@ -38,7 +38,7 @@ android {
 dependencies {
     implementation("com.onfleet:driver:0.13.0")
     implementation("androidx.appcompat:appcompat:1.7.1")
-    implementation("org.jetbrains.kotlin:kotlin-stdlib:2.4.0")
+    implementation("org.jetbrains.kotlin:kotlin-stdlib:2.4.10")
     implementation("androidx.exifinterface:exifinterface:1.4.2")
     implementation(platform("com.google.firebase:firebase-bom:34.16.0"))
     implementation("com.google.firebase:firebase-messaging")
