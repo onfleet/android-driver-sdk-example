@@ -40,7 +40,7 @@ dependencies {
     implementation("androidx.appcompat:appcompat:1.7.1")
     implementation("org.jetbrains.kotlin:kotlin-stdlib:2.4.0")
     implementation("androidx.exifinterface:exifinterface:1.4.2")
-    implementation(platform("com.google.firebase:firebase-bom:34.16.0"))
+    implementation(platform("com.google.firebase:firebase-bom:34.17.0"))
     implementation("com.google.firebase:firebase-messaging")
     implementation("com.jakewharton.timber:timber:5.0.1")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.11.0")
