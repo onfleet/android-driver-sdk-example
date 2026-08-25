@@ -1,6 +1,29 @@
 # Change Log
 Breaking changes and additions to Onfleet SDK will be documented in this file.
 
+## [0.14.0]
+
+Breaking changes to API
+
+### Added Features
+
+- Driver roles and hub assignments (driver profile now carries its role and hubs)
+- On-duty geofence enforcement configuration
+- Camera attachment requirement on pick-up / drop-off task failure
+
+### Added
+
+- Role enum added (`Role`: `DRIVER`, `ORGANIZER`, `ALL`)
+- Hub model added (`Hub`: id, name, location)
+- Driver now exposes `role` (Role) and `hubs` (List<Hub>)
+- OnDutyGeofenceConfig model added (`OnDutyGeofenceConfig`: requirementLevel, radiusMeters)
+- Organization now exposes `onDutyGeofence` (OnDutyGeofenceConfig) settings
+- Organization now exposes `cameraAttachmentOnPickUpFailure` and `cameraAttachmentOnDropOffFailure` (OrganizationRequirement) failure requirements
+
+### Changed
+
+- Driver/Organization public constructor signatures expanded with the fields above (callers passing positional args must update)
+
 ## [0.13.0]
 
 Breaking changes to API
