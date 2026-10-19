@@ -14,7 +14,7 @@ android {
         minSdk = 26
         targetSdk = 36
         versionCode = 1
-        versionName = "0.14.0"
+        versionName = "0.14.1"
     }
     buildTypes {
         release {
@@ -36,18 +36,18 @@ android {
 }
 
 dependencies {
-    implementation("com.onfleet:driver:0.14.0")
-    implementation("androidx.appcompat:appcompat:1.7.1")
-    implementation("org.jetbrains.kotlin:kotlin-stdlib:2.4.0")
+    implementation("com.onfleet:driver:0.14.1")
+    implementation("androidx.appcompat:appcompat:1.8.0")
+    implementation("org.jetbrains.kotlin:kotlin-stdlib:2.4.21")
     implementation("androidx.exifinterface:exifinterface:1.4.2")
-    implementation(platform("com.google.firebase:firebase-bom:34.16.0"))
+    implementation(platform("com.google.firebase:firebase-bom:34.19.0"))
     implementation("com.google.firebase:firebase-messaging")
     implementation("com.jakewharton.timber:timber:5.0.1")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.11.0")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.11.0")
-    implementation("androidx.compose.ui:ui:1.11.4")
-    implementation("androidx.compose.ui:ui-tooling:1.11.4")
-    implementation("androidx.compose.foundation:foundation:1.11.4")
+    implementation("androidx.compose.ui:ui:1.12.1")
+    implementation("androidx.compose.ui:ui-tooling:1.12.1")
+    implementation("androidx.compose.foundation:foundation:1.12.1")
     implementation("androidx.activity:activity-compose:1.13.0")
     implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.11.0")
     implementation("androidx.compose.material3:material3:1.4.0")

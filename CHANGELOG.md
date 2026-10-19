@@ -1,6 +1,29 @@
 # Change Log
 Breaking changes and additions to Onfleet SDK will be documented in this file.
 
+## [0.14.1]
+
+Breaking changes to API
+
+### Added Features
+
+- Dispatcher override of the completion geofence: when dispatch approves completing a task outside the delivery area, the grant reaches the task and arrives as its own push notification
+
+### Added
+
+- Task now exposes `allowCompletionOutsideGeofence` (Boolean)
+- OnfleetFcmNotification adds `GeofenceOverrideGranted`
+
+### Changed
+
+- Task public constructor signature expanded with `allowCompletionOutsideGeofence` (callers passing positional args must update)
+- An exhaustive `when` over `OnfleetFcmNotification` must handle `GeofenceOverrideGranted`
+
+### Fixed
+
+- After two minutes or more without a location update, the completion geofence check keeps the buffered fixes until a fresh one arrives, instead of relying on the single most accurate, possibly stale, fix
+- Task start and completion carry the device timestamps, so completions synced after offline work get an accurate task duration
+
 ## [0.14.0]
 
 Breaking changes to API
