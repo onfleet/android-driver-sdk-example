@@ -1,6 +1,30 @@
 # Change Log
 Breaking changes and additions to Onfleet SDK will be documented in this file.
 
+## [0.14.2]
+
+Breaking changes to API
+
+### Added Features
+
+- Task start rejections are classified: a start Onfleet refuses because the dispatcher deleted or reassigned the task, or because a task it depends on is not completed, now reports its own result and sync status
+
+### Added
+
+- `StartTaskResponse.DISPATCHER_CHANGED_ERROR`: the dispatcher deleted the task or reassigned it to another driver
+- `SyncStatus.SyncStatusStartDispatcherChangedError` (id, taskShortId, routeId, timestamp): a queued start refused because of a dispatcher change
+- `SyncStatus.SyncStatusStartPrerequisiteNotCompletedError` (id, taskShortId, routeId, timestamp): a queued start refused because a task it depends on is not completed
+
+### Changed
+
+- `SyncStatus` is sealed and `StartTaskResponse` gained a value, so an exhaustive `when` over either without an `else` branch must add the new cases
+
+### Fixed
+
+- Batch location uploads carry `accuracy` and `elevation`, matching the HTTP and WebSocket paths
+- Task, driver and route flows re-emit after a process restart once the persisted sync queue loads, so a queued start shows as started
+- The completion's `firstLocationInMs` is no longer reported as 0 after a race at task start
+
 ## [0.14.1]
 
 ### Fixed
